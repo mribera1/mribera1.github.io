@@ -1,55 +1,9 @@
-# mribera1.github.io
-Servicios de consultoría de ICT
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="imagenes/logo_coitcv_es.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto con HTML5</title>
-</head>
-<body>
-    <header>
-        <h1>Proyectos de ICT</h1>
-        <nav>
-<ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="multimedia.html">Casos de éxito</a></li>
-            <li><a href="precios.html">precios</a></li>
-            <li><a href="contacto.html">Contacto</a></li>   
-</ul>
-        </nav>
-    </header>
-    <main>
-        <section id="productos">
+# 🌐 Proyecto ICT
 
-    
-            <article>
-                <h3>Proyecto de ICT</h3>
-                <img src="imagenes/proyecto.png" alt="imagen del articulo" width="120">
-                <p>Proyecto de <strong>viviendas</strong> </p>
-                <hr/>
-            </article>
-            <article>
-                <h3>Certificacion de ICT</h3>
-                <img src="imagenes/certificado.png" alt="imagen del articulo" width="120">
-                <p>Certificacion de <strong>final</strong> de obra</p>
-                <hr/>
-            </article>
-            <article>
-                <h3>Consulta a operadores y Acta de replanteo</h3>
-                <img src="imagenes/operadores.jpeg" alt="imagen del articulo" width="120">
+Este es un sitio web estático creado con **HTML5 y CSS3**.
 
-                <p>Necesario para la certificacion <strong>final</strong></p>
-                <hr/>
-            </article>
+## 📄 Descripción
+La web forma parte del proyecto **ProyectoICT**, un ejemplo de página estática alojada en **GitHub Pages**.
 
-    
-        </section>          
-    </main>
-    <footer>
-       www.proyectoict.com. Más de 25 años de experiencia realizando proyectos-<a href="#top">Ir arriba</a>
-    </footer>
-        
-</body>
-</html>
+## 🧱 Estructura de archivos
+
