@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyecto ICT | Ingeniería y Consultoría en Telecomunicaciones</title>
+  <meta name="description" content="Especialistas en proyectos ICT, certificaciones y consultoría de telecomunicaciones con más de 25 años de experiencia." />
+  <link rel="icon" type="image/png" href="imagenes/logo_coitcv_es.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        <img src="imagenes/logo_coitcv_es.png" alt="Logo Proyecto ICT" />
+        <span>Proyecto ICT</span>
+      </div>
+      <nav class="nav" aria-label="Principal">
+        <a href="#inicio" class="active">Inicio</a>
+        <a href="#casos">Casos de éxito</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="inicio" class="hero" aria-label="Portada">
+    <div class="hero-content">
+      <h1>Proyectos ICT y Certificaciones Oficiales</h1>
+      <p>Más de 25 años de experiencia en ingeniería de telecomunicaciones, diseño y dirección de obra ICT.</p>
+      <a href="#contacto" class="btn">Solicita información</a>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section class="services container">
+    <h2>Servicios de Consultoría ICT</h2>
+    <div class="grid-3">
+      <div class="card">
+        <img src="imagenes/proyecto.png" alt="Proyectos ICT" />
+        <h3>Proyectos ICT</h3>
+        <p>Proyectos de infraestructura común de telecomunicaciones conforme al RD 346/2011.</p>
+      </div>
+      <div class="card">
+        <img src="imagenes/certificado.png" alt="Certificaciones ICT" />
+        <h3>Certificaciones y dirección de obra</h3>
+        <p>Certificación parcial/final y supervisión de ejecución conforme a normativa vigente.</p>
+      </div>
+      <div class="card">
+        <img src="imagenes/operadores.jpeg" alt="Operadores de red" />
+        <h3>Relación con operadores</h3>
+        <p>Coordinación con operadores y despliegues de fibra en edificios.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Casos de éxito -->
+  <section id="casos" class="container section">
+    <h2>Casos de éxito</h2>
+    <p class="section-lead">Algunos ejemplos de trabajos realizados y tramitaciones en sede electrónica.</p>
+    <div class="grid-3">
+      <article class="card">
+        <img src="imagenes/proyecto.png" alt="Memoria y planos ICT" />
+        <h3>Proyecto ICT completo</h3>
+        <p>Memoria, cálculos, planos y pliego. Edificio de 24 viviendas. Aprobado en colegio profesional.</p>
+      </article>
+      <article class="card">
+        <img src="imagenes/certificado.png" alt="Certificación oficial" />
+        <h3>Certificación final de obra</h3>
+        <p>Acta de certificación final y documentación as built conforme a la instalación ejecutada.</p>
+      </article>
+      <article class="card">
+        <img src="imagenes/operadores.jpeg" alt="Tramitación telemática" />
+        <h3>Tramitación telemática</h3>
+        <p>Registro electrónico y coordinación con operadores para puesta en servicio.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Precios -->
+  <section id="precios" class="pricing section">
+    <div class="container">
+      <h2>Precios orientativos</h2>
+      <p class="section-lead">Presupuesto final según características del edificio y alcance.</p>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Obra nueva pequeña</h3>
+          <p class="price">desde 650 €</p>
+          <ul>
+            <li>Memoria y planos ICT</li>
+            <li>Dirección técnica</li>
+            <li>Asesoramiento operadores</li>
+          </ul>
+        </div>
+        <div class="price-card featured">
+          <h3>Edificio viviendas</h3>
+          <p class="price">desde 1.200 €</p>
+          <ul>
+            <li>Proyecto completo ICT</li>
+            <li>Dirección y certificación</li>
+            <li>Documentación as built</li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <h3>Reformas / Adecuaciones</h3>
+          <p class="price">desde 450 €</p>
+          <ul>
+            <li>Memoria técnica</li>
+            <li>Planos actualizados</li>
+            <li>Legalización</li>
+          </ul>
+        </div>
+      </div>
+      <p class="pricing-note">*IVA no incluido. Solicita presupuesto cerrado para tu caso.</p>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="contact section">
+    <div class="container">
+      <h2>Contacto</h2>
+      <p class="section-lead">Cuéntanos tu proyecto y te respondemos en menos de 24 h.</p>
+
+      <!-- Formulario simple por mailto (sin backend) -->
+      <form class="contact-form"
+            action="mailto:info@proyectoict.com"
+            method="post"
+            enctype="text/plain">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="Nombre" type="text" required />
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" name="Email" type="email" required />
+          </div>
+          <div class="form-field">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="Telefono" type="tel" />
+          </div>
+          <div class="form-field full">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="Mensaje" rows="6" required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+
+      <!-- Datos alternativos -->
+      <div class="contact-alt">
+        <p><strong>Email:</strong> <a href="mailto:info@proyectoict.com">info@proyectoict.com</a></p>
+        <p><strong>Ubicación:</strong> Comunidad Valenciana</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2025 Proyecto ICT · Ingenieros de Telecomunicación · Comunidad Valenciana</p>
+    </div>
+  </footer>
+</body>
+</html>
