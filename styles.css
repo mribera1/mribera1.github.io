@@ -1,0 +1,97 @@
+/* ===== Reset básico ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+
+/* === Fondo general (coloca 'fondo_telecom.jpg' junto a estos archivos) === */
+body {
+  font-family: "Segoe UI", Roboto, system-ui, -apple-system, Arial, "Helvetica Neue", sans-serif;
+  line-height: 1.6; color: #333;
+  background: url("fondo_telecom.jpg") center/cover no-repeat fixed;
+  scroll-behavior: smooth;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ===== Cabecera ===== */
+.header { background: rgba(3, 149, 241, 0.92); color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 4px rgba(0,0,0,.1); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(2px); }
+.container { width: 90%; max-width: 1200px; margin: 0 auto; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; color: #fff; text-decoration: none; }
+.logo img { height: 40px; }
+.nav a { color: #fff; text-decoration: none; margin-left: 20px; font-weight: 600; opacity: .95; }
+.nav a:hover, .nav a.active { color: #001219; background: rgba(255,255,255,.9); padding: .35rem .6rem; border-radius: 999px; }
+
+/* ===== Bloques con fondo translúcido para legibilidad sobre la imagen ===== */
+.section, .services, .pricing, .footer {
+  background: rgba(255,255,255,0.86);
+}
+
+.header + .hero { margin-top: 0; }
+
+/* ===== Hero ===== */
+.hero {
+  background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.35)), url("proyecto.jpeg") center/cover no-repeat;
+  color: #fff; text-align: center; padding: 6rem 1rem;
+}
+.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.hero p { font-size: 1.15rem; margin-bottom: 1.5rem; }
+.btn { display: inline-block; background: #00b4d8; color: #fff; padding: .8rem 1.6rem; border-radius: 25px; text-decoration: none; font-weight: 700; border: 0; cursor: pointer; }
+.btn:hover { background: #0077b6; }
+
+/* ===== Secciones comunes ===== */
+.section { padding: 3rem 0; }
+.section-lead { margin: .5rem 0 2rem; color: #555; }
+.services { text-align: center; padding: 3rem 0; }
+.services h2, .section h2 { font-size: 2rem; margin-bottom: 1.2rem; color: #0a2b40; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.1); padding: 1.1rem; transition: transform .25s ease, box-shadow .25s ease; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+.card h3 { margin: .6rem 0 .3rem; color: #0a2b40; }
+
+/* --- Tarjetas alineadas imagen+texto y misma altura (Servicios y Casos) --- */
+.grid-3 .card { display: flex; flex-direction: column; justify-content: flex-start; }
+.card-media { width: 100%; height: 200px; overflow: hidden; border-radius: 10px; }
+.card-media img { width: 100%; height: 100%; object-fit: cover; }
+.card-body { display: flex; flex-direction: column; gap: .4rem; padding-top: .7rem; flex: 1; }
+.card-body h3 { margin: 0; }
+.card-body p { margin: 0; }
+
+/* ===== Pricing ===== */
+.pricing { padding: 3rem 0; }
+.pricing .container { background: transparent; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 1.2rem; }
+.price-card { background: #fff; border-radius: 14px; padding: 1.4rem; box-shadow: 0 4px 12px rgba(0,0,0,.08); border: 1px solid #e6eef0; }
+.price-card.featured { border-color: #00b4d8; box-shadow: 0 6px 18px rgba(0, 180, 216, .18); }
+.price-card h3 { color: #0a2b40; margin-bottom: .4rem; }
+.price { font-size: 1.6rem; font-weight: 800; color: #0077b6; margin-bottom: .6rem; }
+.price-card ul { list-style: none; color: #444; }
+.price-card li { padding: .25rem 0; }
+.pricing-note { margin-top: 1rem; color: #666; font-size: .95rem; }
+
+/* ===== Mostrar/ocultar secciones según ancla ===== */
+/* Por defecto, solo Inicio (hero + services) es visible: */
+.page-casos, .page-precios { display: none; }
+
+/* Cuando #casos está activo: mostramos #casos y ocultamos Inicio (hero + services) */
+#casos:target { display: block; }
+#casos:target ~ #inicio,
+#casos:target ~ #services { display: none; }
+
+/* Cuando #precios está activo: mostramos #precios y ocultamos Inicio (hero + services) */
+#precios:target { display: block; }
+#precios:target ~ #inicio,
+#precios:target ~ #services { display: none; }
+
+/* Ajuste de scroll para que no quede oculto bajo el header fijo */
+#casos:target, #precios:target { scroll-margin-top: 80px; }
+
+/* ===== Footer ===== */
+.footer { background: rgba(10, 43, 64, 0.95); color: #fff; padding: 1.5rem 0; text-align: center; margin-top: 2rem; }
+.footer a { color: #a8e0ff; text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ===== Responsive ===== */
+@media (max-width: 720px) {
+  .hero { padding: 4.5rem 1rem; }
+  .hero h1 { font-size: 2rem; }
+}
