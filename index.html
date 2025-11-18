@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyecto ICT | Ingeniería y Consultoría en Telecomunicaciones</title>
+  <meta name="description" content="Especialistas en proyectos ICT, certificaciones y consultoría de telecomunicaciones con más de 25 años de experiencia." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="#inicio" aria-label="Ir al inicio">
+        <img src="logo.png" alt="Logo Proyecto ICT" />
+        <span>Proyecto ICT</span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#inicio" class="active">Inicio</a>
+        <a href="#casos">Casos de éxito</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="casos" class="page-casos section container">
+    <h2>Proyectos recientes</h2>
+    <div class="grid-3">
+      <article class="card">
+        <figure class="card-media">
+          <img src="12.png" alt="Proyecto 12 adosados en Finestrat (Alicante)" loading="lazy" />
+        </figure>
+        <div class="card-body">
+          <h3>Proyecto 12 adosados en Finestrat (Alicante)</h3>
+          <p>Proyecto con parcela amplia y diseño eficiente en extensión</p>
+        </div>
+      </article>
+      <article class="card">
+        <figure class="card-media">
+          <img src="27.png" alt="Proyecto 27 viviendas en Elda (Alicante)" loading="lazy" />
+        </figure>
+        <div class="card-body">
+          <h3>Proyecto 27 viviendas en Elda (Alicante)</h3>
+          <p>Proyecto en edificio con alturas diseñado de manera minimalista</p>
+        </div>
+      </article>
+      <article class="card">
+        <figure class="card-media">
+          <img src="2.png" alt="Proyecto 2 viviendas en Elda (Alicante)" loading="lazy" />
+        </figure>
+        <div class="card-body">
+          <h3>Proyecto 2 viviendas en Elda (Alicante)</h3>
+          <p>Proyecto sencillo muy habitual hoy en día al ser necesario ya desde 2 viviendas en división horizontal</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="precios" class="page-precios pricing section">
+    <div class="container">
+      <h2>Precios orientativos</h2>
+      <p class="section-lead">Presupuesto final según características del edificio y alcance.</p>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Obra nueva pequeña</h3>
+          <p class="price">desde 650 €</p>
+          <ul>
+            <li>Memoria y planos ICT</li>
+            <li>Dirección técnica</li>
+            <li>Asesoramiento a operadores</li>
+          </ul>
+        </div>
+        <div class="price-card featured">
+          <h3>Edificio de viviendas</h3>
+          <p class="price">desde 2.000 €</p>
+          <ul>
+            <li>Proyecto completo ICT</li>
+            <li>Dirección y certificación</li>
+            <li>Asesoramiento a operadores</li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <h3>Cableado estructurado</h3>
+          <p class="price">desde 1.000 €</p>
+          <ul>
+            <li>Memoria técnica</li>
+            <li>Planos actualizados</li>
+            <li>Dirección de obra</li>
+          </ul>
+        </div>
+      </div>
+      <p class="pricing-note">*IVA no incluido. Solicita presupuesto cerrado para tu caso.</p>
+    </div>
+  </section>
+
+  <section id="inicio" class="hero" aria-label="Portada">
+    <div class="hero-content">
+      <h1>Proyectos ICT y Certificaciones Oficiales</h1>
+      <p>Más de 25 años de experiencia en ingeniería de telecomunicaciones, diseño y dirección de obra ICT.</p>
+    </div>
+  </section>
+
+  <section id="services" class="services container">
+    <h2>Servicios de Consultoría ICT</h2>
+    <div class="grid-3">
+      <div class="card">
+        <figure class="card-media">
+          <img src="proyecto.jpeg" alt="Proyectos de ICT" loading="lazy" />
+        </figure>
+        <div class="card-body">
+          <h3>Proyectos de ICT</h3>
+          <p>Proyectos de infraestructura común de telecomunicaciones conforme al RD 346/2011.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <figure class="card-media">
+          <img src="certificacion.jpeg" alt="Certificaciones ICT" loading="lazy" />
+        </figure>
+        <div class="card-body">
+          <h3>Certificaciones de ICT</h3>
+          <p>Dirección de obra y certificación final de obra conforme al reglamento.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <figure class="card-media">
+          <img src="consulta.jpeg" alt="Consulta a operadores y acta de replanteo" loading="lazy" />
+        </figure>
+        <div class="card-body">
+          <h3>Acta de replanteo</h3>
+          <p>Consulta a operadores en la zona y elaboración del acta de replanteo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="page-contacto section">
+    <div class="container narrow">
+      <h2>Contacto</h2>
+      <p class="section-lead">Al enviar se abrirá tu cliente de correo para confirmar el envío.</p>
+
+      <form id="contactForm" class="form-card" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="given-name" required />
+            <small class="error" id="error-nombre"></small>
+          </div>
+
+          <div class="form-field">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" name="apellidos" autocomplete="family-name" required />
+            <small class="error" id="error-apellidos"></small>
+          </div>
+
+          <div class="form-field">
+            <label for="dni">DNI</label>
+            <input type="text" id="dni" name="dni" placeholder="12345678Z" required />
+            <small class="error" id="error-dni"></small>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Correo</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+            <small class="error" id="error-email"></small>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="descripcion">Descripción de lo que necesitas</label>
+          <textarea id="descripcion" name="descripcion" rows="5" required></textarea>
+          <small class="error" id="error-descripcion"></small>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn">Enviar</button>
+          <span id="formStatus" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <p class="privacy-note">Al enviar aceptas que contacte contigo por email para atender tu solicitud.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>
+        Miguel Ángel Ribera Blanes — Ingeniero de Telecomunicación —
+        <a href="tel:+34610518583">610 518 583</a> —
+        <a href="mailto:miguelangelribbanyeres@gmail.com">miguelangelribbanyeres@gmail.com</a> —
+        <a href="https://www.linkedin.com/in/miguelangelriberablanes" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </p>
+    </div>
+  </footer>
+  <button id="chatButton" class="chat-button" aria-label="Abrir chat IA">💬</button>
+</body>
+</html>
