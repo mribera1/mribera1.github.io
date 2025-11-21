@@ -26,7 +26,7 @@ img { max-width: 100%; display: block; }
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: 0 2px 4px rgba(0,0,0,.12);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
   backdrop-filter: blur(8px);
 }
 .header-inner {
@@ -55,7 +55,7 @@ img { max-width: 100%; display: block; }
   transition: background .2s ease, color .2s ease, transform .15s ease;
 }
 .nav a:hover {
-  background: rgba(255,255,255,.14);
+  background: rgba(255,255,255,0.14);
   transform: translateY(-1px);
 }
 .nav a.active {
@@ -134,7 +134,7 @@ img { max-width: 100%; display: block; }
   border-radius: 12px;
   padding: .7rem .9rem;
   min-width: 170px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 .hero-badge strong {
   display: block;
@@ -149,7 +149,7 @@ img { max-width: 100%; display: block; }
   background: rgba(15, 23, 42, .85);
   border-radius: 18px;
   padding: 1.6rem 1.5rem 1.4rem;
-  box-shadow: 0 16px 40px rgba(0,0,0,.35);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
   border: 1px solid rgba(148, 163, 184, .45);
 }
 .hero-panel h2 {
@@ -190,14 +190,14 @@ img { max-width: 100%; display: block; }
 .card {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(15,23,42,.08);
+  box-shadow: 0 2px 8px rgba(15,23,42,0.08);
   padding: 1.15rem;
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   border: 1px solid #e2e8f0;
 }
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(15,23,42,.14);
+  box-shadow: 0 12px 28px rgba(15,23,42,0.14);
   border-color: #bae6fd;
 }
 .card-media {
@@ -237,7 +237,7 @@ img { max-width: 100%; display: block; }
 /* ===== Servicios ===== */
 .services {
   background: #fff;
-  box-shadow: 0 12px 36px rgba(15,23,42,.08);
+  box-shadow: 0 12px 36px rgba(15,23,42,0.08);
   border-radius: 24px 24px 0 0;
 }
 
@@ -251,13 +251,13 @@ img { max-width: 100%; display: block; }
   background: #fff;
   border-radius: 18px;
   padding: 1.4rem 1.5rem 1.3rem;
-  box-shadow: 0 6px 18px rgba(15,23,42,.08);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.08);
   border: 1px solid #e2e8f0;
   position: relative;
 }
 .price-card.featured {
   border-color: #0ea5e9;
-  box-shadow: 0 10px 28px rgba(14,165,233,.24);
+  box-shadow: 0 10px 28px rgba(14,165,233,0.24);
 }
 .price {
   font-size: 1.7rem;
@@ -298,7 +298,7 @@ img { max-width: 100%; display: block; }
   background: #fff;
   border-radius: 18px;
   padding: 1.6rem 1.5rem;
-  box-shadow: 0 6px 18px rgba(15,23,42,.08);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.08);
   border: 1px solid #e2e8f0;
 }
 .form-grid {
@@ -369,7 +369,7 @@ img { max-width: 100%; display: block; }
 .btn-primary {
   background: #0ea5e9;
   color: #f9fafb;
-  box-shadow: 0 12px 24px rgba(14,165,233,.35);
+  box-shadow: 0 12px 24px rgba(14,165,233,0.35);
 }
 .btn-primary:hover {
   background: #0284c7;
@@ -378,10 +378,10 @@ img { max-width: 100%; display: block; }
 .btn-ghost {
   background: transparent;
   color: #e2f3ff;
-  border: 1px solid rgba(148,163,184,.7);
+  border: 1px solid rgba(148,163,184,0.07);
 }
 .btn-ghost:hover {
-  background: rgba(15,23,42,.5);
+  background: rgba(15,23,42,0.05);
 }
 
 /* ===== Navegación por anclas (páginas) ===== */
@@ -391,8 +391,7 @@ img { max-width: 100%; display: block; }
   display: none;
 }
 
-/* Cuando entras en #casos, #precios o #contacto, se muestran sólo esas secciones
-   y se oculta el hero + servicios para simular páginas distintas */
+/* Mostrar sólo la “página” activa y ocultar hero + servicios */
 #casos:target,
 #precios:target,
 #contacto:target {
@@ -419,8 +418,9 @@ img { max-width: 100%; display: block; }
   background: #0a2b40;
   color: #fff;
   padding: 1.6rem 0;
-  text-align: center;
+  text-align: left;      /* alineado a la izquierda */
   margin-top: 2rem;
+  padding-right: 140px;  /* deja hueco para el botón flotante de presupuesto */
 }
 .footer a {
   color: #a8e0ff;
@@ -453,12 +453,19 @@ img { max-width: 100%; display: block; }
   }
 }
 
+/* Ajuste específico en móvil para que no quede demasiado hueco en el footer */
+@media (max-width: 480px) {
+  .footer {
+    padding-right: 1.6rem;
+  }
+}
+
 /* ===== Botón de chat flotante con texto ===== */
 .chat-button {
   position: fixed !important;
   bottom: 24px;
   right: 24px;
-  /* ahora es una píldora, no sólo un círculo */
+  /* píldora con texto */
   padding: 0.75rem 1rem;
   background: #0ea5e9;
   color: white;
@@ -469,7 +476,7 @@ img { max-width: 100%; display: block; }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 6px 18px rgba(15,23,42,.35);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.35);
   transition: transform .25s ease, background .25s ease;
   z-index: 9999;
   max-width: 350px;
@@ -504,7 +511,7 @@ img { max-width: 100%; display: block; }
 .ict-carousel .carousel-inner {
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 12px 32px rgba(15,23,42,.18);
+  box-shadow: 0 12px 32px rgba(15,23,42,0.18);
 }
 .ict-carousel .carousel-item img {
   max-height: 420px;
@@ -522,3 +529,5 @@ img { max-width: 100%; display: block; }
 .ict-carousel .carousel-caption p {
   font-size: .9rem;
 }
+
+
