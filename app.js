@@ -24,44 +24,53 @@ function validateEmail(email) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contactForm");
-  if (!form) return;
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const status = document.getElementById("formStatus");
+      const get = (id) => document.getElementById(id);
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const status = document.getElementById("formStatus");
-    const get = (id) => document.getElementById(id);
+      const nombre = get("nombre");
+      const apellidos = get("apellidos");
+      const dni = get("dni");
+      const email = get("email");
+      const descripcion = get("descripcion");
 
-    const nombre = get("nombre");
-    const apellidos = get("apellidos");
-    const dni = get("dni");
-    const email = get("email");
-    const descripcion = get("descripcion");
+      // Limpia errores
+      ["nombre","apellidos","dni","email","descripcion"].forEach(id => {
+        const el = document.getElementById("error-" + id);
+        if (el) el.textContent = "";
+      });
 
-    // Limpia errores
-    ["nombre","apellidos","dni","email","descripcion"].forEach(id => {
-      const el = document.getElementById("error-" + id);
-      if (el) el.textContent = "";
+      // Validaciones básicas
+      let ok = true;
+      if (!nombre.value.trim()) { ok = false; get("error-nombre").textContent = "Introduce tu nombre."; }
+      if (!apellidos.value.trim()) { ok = false; get("error-apellidos").textContent = "Introduce tus apellidos."; }
+      if (!validateDNI(dni.value)) { ok = false; get("error-dni").textContent = "DNI/NIE no válido."; }
+      if (!validateEmail(email.value)) { ok = false; get("error-email").textContent = "Correo no válido."; }
+      if (!descripcion.value.trim()) { ok = false; get("error-descripcion").textContent = "Describe brevemente lo que necesitas."; }
+      if (!ok) return;
+
+      status.style.color = "#0a662e";
+      status.textContent = "Abriendo tu cliente de correo…";
+
+      const subject = encodeURIComponent("Contacto web - Proyecto ICT");
+      const body = encodeURIComponent(
+        `Nombre: ${nombre.value}\nApellidos: ${apellidos.value}\nDNI: ${dni.value.toUpperCase()}\nCorreo: ${email.value}\n\nDescripción:\n${descripcion.value}`
+      );
+
+      // Abre el cliente de correo configurado en el sistema
+      window.location.href = `mailto:miguelangelribbanyeres@gmail.com?subject=${subject}&body=${body}`;
     });
+  }
 
-    // Validaciones básicas
-    let ok = true;
-    if (!nombre.value.trim()) { ok = false; get("error-nombre").textContent = "Introduce tu nombre."; }
-    if (!apellidos.value.trim()) { ok = false; get("error-apellidos").textContent = "Introduce tus apellidos."; }
-    if (!validateDNI(dni.value)) { ok = false; get("error-dni").textContent = "DNI/NIE no válido."; }
-    if (!validateEmail(email.value)) { ok = false; get("error-email").textContent = "Correo no válido."; }
-    if (!descripcion.value.trim()) { ok = false; get("error-descripcion").textContent = "Describe brevemente lo que necesitas."; }
-    if (!ok) return;
-
-    status.style.color = "#0a662e";
-    status.textContent = "Abriendo tu cliente de correo…";
-
-    const subject = encodeURIComponent("Contacto web - Proyecto ICT");
-    const body = encodeURIComponent(
-      `Nombre: ${nombre.value}\nApellidos: ${apellidos.value}\nDNI: ${dni.value.toUpperCase()}\nCorreo: ${email.value}\n\nDescripción:\n${descripcion.value}`
-    );
-
-    // Abre el cliente de correo configurado en el sistema
-    window.location.href = `mailto:miguelangelribbanyeres@gmail.com?subject=${subject}&body=${body}`;
+  // Marca el enlace activo en el menú al hacer clic
+  const navLinks = document.querySelectorAll(".nav a");
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    });
   });
 });
 
