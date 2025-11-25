@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Página principal -->
   <url>
     <loc>https://proyectoict.com/</loc>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Secciones internas dentro de la misma página (anclas) -->
+  <!-- No son URLs independientes pero ayudan al rastreo -->
+  <url>
+    <loc>https://proyectoict.com/#servicios</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://proyectoict.com/#casos-exito</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://proyectoict.com/#contacto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- URLs adicionales solo si existen en tu repositorio -->
+  <!-- [Inferència] Descomenta solo si realmente existen como páginas separadas -->
+  <!--
+  <url>
+    <loc>https://proyectoict.com/contacto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://proyectoict.com/casos-exito</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://proyectoict.com/servicios</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  -->
+
 </urlset>
