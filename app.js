@@ -1,4 +1,5 @@
-// app.js — 0-config (mailto) — funciona en local sin servidores externos
+// app.js
+
 function nifLetter(num) {
   const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
   return letters[num % 23];
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (el) el.textContent = "";
       });
 
-      // Validaciones básicas
+      // Validaciones
       let ok = true;
       if (!nombre.value.trim()) { ok = false; get("error-nombre").textContent = "Introduce tu nombre."; }
       if (!apellidos.value.trim()) { ok = false; get("error-apellidos").textContent = "Introduce tus apellidos."; }
@@ -51,16 +52,34 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!descripcion.value.trim()) { ok = false; get("error-descripcion").textContent = "Describe brevemente lo que necesitas."; }
       if (!ok) return;
 
-      status.style.color = "#0a662e";
-      status.textContent = "Abriendo tu cliente de correo…";
+      status.style.color = "#555";
+      status.textContent = "Enviando...";
 
-      const subject = encodeURIComponent("Contacto web - Proyecto ICT");
-      const body = encodeURIComponent(
-        `Nombre: ${nombre.value}\nApellidos: ${apellidos.value}\nDNI: ${dni.value.toUpperCase()}\nCorreo: ${email.value}\n\nDescripción:\n${descripcion.value}`
-      );
-
-      // Abre el cliente de correo configurado en el sistema
-      window.location.href = `mailto:miguelangelribbanyeres@gmail.com?subject=${subject}&body=${body}`;
+      fetch("https://api.proyectoict.com/contacto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: nombre.value.trim(),
+          apellidos: apellidos.value.trim(),
+          dni: dni.value.trim().toUpperCase(),
+          email: email.value.trim(),
+          descripcion: descripcion.value.trim()
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === "ok") {
+          status.style.color = "#0a662e";
+          status.textContent = "Mensaje enviado. Te contactaremos pronto.";
+          form.reset();
+        } else {
+          throw new Error(data.status);
+        }
+      })
+      .catch(() => {
+        status.style.color = "#c00";
+        status.textContent = "Error al enviar. Escríbenos a miguelangelribbanyeres@gmail.com";
+      });
     });
   }
 
