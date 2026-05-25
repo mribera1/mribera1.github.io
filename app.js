@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch(() => {
         status.style.color = "#c00";
-        status.textContent = "Error al enviar. Esc\u00erbenos a miguelangelribbanyeres@gmail.com";
+        status.textContent = "Error al enviar. Escríbenos a miguelangelribbanyeres@gmail.com";
       });
     });
   }
