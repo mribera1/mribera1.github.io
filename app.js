@@ -1,23 +1,5 @@
 // app.js
 
-function nifLetter(num) {
-  const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
-  return letters[num % 23];
-}
-
-function validateDNI(value) {
-  const v = value.trim().toUpperCase();
-  const match = v.match(/^([XYZ]?)(\d{7,8})([A-Z])$/);
-  if (!match) return false;
-  let number = match[2];
-  const pref = match[1];
-  if (pref) {
-    const map = { X: "0", Y: "1", Z: "2" };
-    number = map[pref] + number;
-  }
-  return nifLetter(parseInt(number, 10)) === match[3];
-}
-
 function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -32,11 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const get = (id) => document.getElementById(id);
       const nombre = get("nombre");
       const apellidos = get("apellidos");
-      const dni = get("dni");
       const email = get("email");
       const descripcion = get("descripcion");
 
-      ["nombre","apellidos","dni","email","descripcion"].forEach(id => {
+      ["nombre","apellidos","email","descripcion"].forEach(id => {
         const el = document.getElementById("error-" + id);
         if (el) el.textContent = "";
       });
@@ -44,8 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let ok = true;
       if (!nombre.value.trim()) { ok = false; get("error-nombre").textContent = "Introduce tu nombre."; }
       if (!apellidos.value.trim()) { ok = false; get("error-apellidos").textContent = "Introduce tus apellidos."; }
-      if (!validateDNI(dni.value)) { ok = false; get("error-dni").textContent = "DNI/NIE no válido."; }
-      if (!validateEmail(email.value)) { ok = false; get("error-email").textContent = "Correo no válido."; }
+      if (!validateEmail(email.value)) { ok = false; get("error-email").textContent = "Correo no v\u00e1lido."; }
       if (!descripcion.value.trim()) { ok = false; get("error-descripcion").textContent = "Describe brevemente lo que necesitas."; }
       if (!ok) return;
 
@@ -58,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({
           nombre: nombre.value.trim(),
           apellidos: apellidos.value.trim(),
-          dni: dni.value.trim().toUpperCase(),
           email: email.value.trim(),
           descripcion: descripcion.value.trim()
         })
@@ -73,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch(() => {
         status.style.color = "#c00";
-        status.textContent = "Error al enviar. Esríbenos a miguelangelribbanyeres@gmail.com";
+        status.textContent = "Error al enviar. Esc\u00erbenos a miguelangelribbanyeres@gmail.com";
       });
     });
   }
@@ -90,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // === CHAT WIDGET ===
   const chatButton = document.getElementById("chatButton");
   if (chatButton) {
-    // Build chat overlay
     const overlay = document.createElement("div");
     overlay.id = "ict-chat-overlay";
     overlay.innerHTML = `
@@ -108,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     document.body.appendChild(overlay);
 
-    // Styles
     const style = document.createElement("style");
     style.textContent = `
       #ict-chat-overlay { display:none; position:fixed; bottom:90px; right:24px; z-index:9999; width:340px; max-width:95vw; }
@@ -157,10 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         const data = await res.json();
         typing.remove();
-        addMsg(data.reply || "No he podido responder. Inténtalo de nuevo.", "bot");
+        addMsg(data.reply || "No he podido responder. Int\u00e9ntalo de nuevo.", "bot");
       } catch(e) {
         typing.remove();
-        addMsg("Error de conexión. Inténtalo de nuevo.", "bot");
+        addMsg("Error de conexi\u00f3n. Int\u00e9ntalo de nuevo.", "bot");
       }
       input.disabled = false;
       document.getElementById("ict-chat-send").disabled = false;
