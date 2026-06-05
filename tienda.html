@@ -158,7 +158,10 @@
       <!-- PASO 2: Datos de contacto -->
       <div class="paso" id="paso2">
         <h5 class="mb-3"><span class="badge-paso">2</span> Tus datos de contacto</h5>
-        <p class="text-muted small">Miguel Ángel Ribera se pondrá en contacto contigo tras recibir el pedido.</p>
+        <div id="aviso-perfil" class="alert alert-info small d-none">
+          ✅ Datos cargados desde tu perfil. Puedes modificarlos si lo necesitas.
+        </div>
+        <p id="aviso-anonimo" class="text-muted small">Miguel Ángel Ribera se pondrá en contacto contigo tras recibir el pedido. <a href="login.html">Inicia sesión</a> para autocompletar tus datos.</p>
         <div class="row g-3">
           <div class="col-md-6">
             <label class="form-label">Nombre y apellidos *</label>
@@ -173,7 +176,7 @@
             <input type="tel" id="telefono" class="form-control" placeholder="600 000 000">
           </div>
         </div>
-        <div class="d-flex gap-3 mt-4">
+        <div class="d-flex gap-3 mt-4 flex-wrap">
           <button class="btn btn-outline-secondary" onclick="irPaso1()">← Volver</button>
           <button class="btn btn-primary px-4" onclick="irPaso3()">Continuar →</button>
         </div>
@@ -183,7 +186,7 @@
       <div class="paso" id="paso3">
         <h5 class="mb-3"><span class="badge-paso">3</span> Confirmar y pagar</h5>
         <div id="resumen-detalle" class="mb-4"></div>
-        <p class="text-muted small mb-4">
+        <p class="text-muted small mb-3">
           Al hacer clic serás redirigido a PayPal para completar el pago de forma segura.
           Recibirás un email de confirmación en cuanto se procese.
         </p>
@@ -194,6 +197,14 @@
             <span id="paypal-spinner" style="display:none">
               <span class="spinner-border spinner-border-sm me-2"></span>Redirigiendo...
             </span>
+          </button>
+        </div>
+        <!-- Botón guardar sin pagar (solo para usuarios logueados) -->
+        <div id="bloque-guardar" class="d-none mt-3 pt-3 border-top">
+          <p class="text-muted small mb-2">¿Quieres guardar el pedido y pagar más tarde?</p>
+          <button class="btn btn-outline-secondary" onclick="guardarSinPagar()" id="btn-guardar">
+            <span id="guardar-texto">Guardar en mi historial sin pagar</span>
+            <span id="guardar-spinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
           </button>
         </div>
         <div id="error-pago" class="alert alert-danger mt-3" style="display:none"></div>
@@ -234,6 +245,23 @@
   const API = 'https://api.proyectoict.com';
   let productoSeleccionado = null;
   let precioActual = 0;
+  const token = localStorage.getItem('pict_token');
+
+  // Precargar datos del perfil si está logueado
+  if (token) {
+    fetch(`${API}/cliente/perfil`, { headers: { Authorization: `Bearer ${token}` } })
+      .then(r => r.json())
+      .then(data => {
+        if (data.perfil) {
+          document.getElementById('nombre').value   = data.perfil.nombre   || '';
+          document.getElementById('email').value    = data.perfil.email    || '';
+          document.getElementById('telefono').value = data.perfil.telefono || '';
+          document.getElementById('aviso-perfil').classList.remove('d-none');
+          document.getElementById('aviso-anonimo').classList.add('d-none');
+          document.getElementById('bloque-guardar').classList.remove('d-none');
+        }
+      }).catch(() => {});
+  }
 
   const NOMBRES_PRODUCTO = {
     proyecto:      'Proyecto ICT',
@@ -318,6 +346,38 @@
 
     document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
     document.getElementById('paso3').classList.add('activo');
+  }
+
+  async function guardarSinPagar() {
+    const btn     = document.getElementById('btn-guardar');
+    const spinner = document.getElementById('guardar-spinner');
+    const texto   = document.getElementById('guardar-texto');
+    const errBox  = document.getElementById('error-pago');
+    btn.disabled = true;
+    spinner.classList.remove('d-none');
+    errBox.style.display = 'none';
+    const viviendas = parseInt(document.getElementById('num-viviendas')?.value) || 0;
+    try {
+      const resp = await fetch(`${API}/pedido/guardar`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ producto: productoSeleccionado, viviendas })
+      });
+      const data = await resp.json();
+      if (data.status === 'ok') {
+        window.location.href = 'area-cliente.html';
+      } else {
+        errBox.textContent = data.error || 'Error al guardar el pedido';
+        errBox.style.display = 'block';
+        btn.disabled = false;
+        spinner.classList.add('d-none');
+      }
+    } catch (err) {
+      errBox.textContent = 'Error de conexión. Inténtalo de nuevo.';
+      errBox.style.display = 'block';
+      btn.disabled = false;
+      spinner.classList.add('d-none');
+    }
   }
 
   async function iniciarPago() {
