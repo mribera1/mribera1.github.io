@@ -325,6 +325,21 @@
     if (!productoSeleccionado) return;
     document.querySelectorAll('.paso').forEach(p => p.classList.remove('activo'));
     document.getElementById('paso2').classList.add('activo');
+    // Recargar perfil al entrar al paso 2 (por si no cargó al inicio)
+    if (token && !document.getElementById('nombre').value) {
+      fetch(`${API}/cliente/perfil`, { headers: { Authorization: `Bearer ${token}` } })
+        .then(r => r.json())
+        .then(data => {
+          if (data.perfil) {
+            document.getElementById('nombre').value   = data.perfil.nombre   || '';
+            document.getElementById('email').value    = data.perfil.email    || '';
+            document.getElementById('telefono').value = data.perfil.telefono || '';
+            document.getElementById('aviso-perfil').classList.remove('d-none');
+            document.getElementById('aviso-anonimo').classList.add('d-none');
+            document.getElementById('bloque-guardar').classList.remove('d-none');
+          }
+        }).catch(() => {});
+    }
   }
 
   function irPaso3() {
