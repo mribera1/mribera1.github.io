@@ -279,9 +279,13 @@ async function cargarPedidos() {
             </div>
           </div>
           <div class="progress-steps">${stepsHtml}</div>
-          <div class="d-flex align-items-center gap-2 mt-2">
+          <div class="d-flex align-items-center gap-2 mt-2 flex-wrap">
             <span class="text-muted small">Estado del proyecto:</span>
             <span class="estado-badge estado-${p.estado_proyecto?.toLowerCase()}">${p.estado_proyecto}</span>
+            ${p.estado_pago === 'pendiente' ? `
+            <button class="btn btn-sm btn-warning ms-auto" onclick="pagarAhora(${p.id})">
+              💳 Pagar ahora
+            </button>` : ''}
           </div>
         </div>`;
     }).join('');
@@ -327,6 +331,25 @@ async function guardarPerfil() {
     alert.className = 'alert alert-danger';
     alert.textContent = 'Error de conexión';
     alert.classList.remove('d-none');
+  }
+}
+
+// ── Pagar pedido pendiente ──────────────────────────────────────────────────
+async function pagarAhora(pedidoId) {
+  try {
+    const resp = await fetch(`${API}/pedido/pagar`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ pedido_id: pedidoId })
+    });
+    const data = await resp.json();
+    if (data.approval_url) {
+      window.location.href = data.approval_url;
+    } else {
+      alert('Error al generar el pago: ' + (data.error || 'inténtalo de nuevo'));
+    }
+  } catch (err) {
+    alert('Error de conexión. Inténtalo de nuevo.');
   }
 }
 
