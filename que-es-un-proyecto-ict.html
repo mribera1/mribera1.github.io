@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -33,6 +33,93 @@
   />
 
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- DATOS ESTRUCTURADOS -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://www.proyectoict.com/que-es-un-proyecto-ict.html#article",
+        "headline": "Qué es un proyecto ICT y cuándo lo necesitas",
+        "description": "Qué es un proyecto ICT y cuándo es obligatorio según el RD 346/2011. Obligaciones del promotor, costes típicos, errores frecuentes y ejemplos reales en Alicante.",
+        "url": "https://www.proyectoict.com/que-es-un-proyecto-ict.html",
+        "inLanguage": "es",
+        "author": {
+          "@type": "Person",
+          "@id": "https://www.proyectoict.com/#persona",
+          "name": "Miguel Ángel Ribera Blanes",
+          "jobTitle": "Ingeniero de Telecomunicación"
+        },
+        "publisher": {
+          "@id": "https://www.proyectoict.com/#org"
+        },
+        "about": {
+          "@type": "Thing",
+          "name": "Proyecto ICT",
+          "description": "Infraestructura Común de Telecomunicaciones regulada por el Real Decreto 346/2011 en España"
+        },
+        "mentions": [
+          { "@type": "Legislation", "name": "Real Decreto 346/2011", "jurisdiction": "España" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.proyectoict.com/que-es-un-proyecto-ict.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué es un proyecto ICT?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La Infraestructura Común de Telecomunicaciones (ICT) es el conjunto de instalaciones que permite distribuir los servicios de telecomunicación —fibra óptica, televisión, telefonía— desde la red pública hasta cada vivienda o local del edificio. El proyecto ICT es el documento técnico obligatorio que diseña esa infraestructura conforme al RD 346/2011."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuándo es obligatorio un proyecto ICT?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Es obligatorio para todos los edificios de nueva construcción, ampliaciones que generen nuevas viviendas o locales, y rehabilitaciones integrales en España. También aplica a urbanizaciones, polígonos industriales y usos terciarios. Sin el visado del proyecto ICT no se puede obtener la licencia de primera ocupación."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué edificios necesitan proyecto ICT?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Necesitan proyecto ICT: edificios residenciales en altura, adosados y pareados, rehabilitaciones con nuevas viviendas, usos terciarios (oficinas, hoteles, centros comerciales) y ampliaciones de edificios existentes. En edificios de una sola vivienda el proyecto puede simplificarse."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuáles son los errores más comunes al preparar un proyecto ICT?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Los errores más frecuentes son: no reservar espacio suficiente para el cuarto de telecomunicaciones, no consultar a los operadores en fase de proyecto, no incluir el acta de replanteo a tiempo, y no coordinar la ICT con el resto de instalaciones del edificio. Estos errores pueden retrasar la licencia de primera ocupación."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto cuesta un proyecto ICT en Alicante?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El precio orientativo en Alicante y Comunidad Valenciana es: 700 € para edificios hasta 5 viviendas, 1.000 € hasta 10 viviendas, y para más viviendas se calcula como (número de viviendas × 1.000) / 10. El acta de replanteo tiene un coste fijo de 200 €. IVA no incluido."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.proyectoict.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Qué es un proyecto ICT", "item": "https://www.proyectoict.com/que-es-un-proyecto-ict.html" }
+        ]
+      }
+    ]
+  }
+  </script>
   <script defer src="app.js"></script>
 </head>
 
