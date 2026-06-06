@@ -45,60 +45,196 @@
   <link rel="stylesheet" href="styles.css" />
   <script defer src="app.js"></script>
 
-  <!-- DATOS ESTRUCTURADOS -->
+  <!-- DATOS ESTRUCTURADOS — Schema.org mejorado para SEO y LLMs -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["Organization", "ProfessionalService"],
-        "@id": "https://proyectoict.com/#org",
+        "@type": ["LocalBusiness", "ProfessionalService"],
+        "@id": "https://www.proyectoict.com/#org",
         "name": "ProyectoICT",
-        "url": "https://proyectoict.com/",
-        "logo": "https://proyectoict.com/images/og-image.jpg",
-        "image": "https://proyectoict.com/images/og-image.jpg",
-        "founder": "Miguel Ángel Ribera Blanes",
+        "alternateName": "Proyecto ICT Alicante",
+        "description": "Consultoría especializada en proyectos ICT (Infraestructura Común de Telecomunicaciones) para edificios residenciales y terciarios. Proyectos visados, certificaciones y actas de replanteo conforme al RD 346/2011.",
+        "url": "https://www.proyectoict.com/",
+        "logo": "https://www.proyectoict.com/logo.png",
+        "image": "https://www.proyectoict.com/logo.png",
+        "priceRange": "€€",
+        "currenciesAccepted": "EUR",
+        "paymentAccepted": "PayPal, transferencia bancaria",
         "email": "miguelangelribbanyeres@gmail.com",
         "telephone": "+34610518583",
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "Banyeres de Mariola",
           "addressLocality": "Banyeres de Mariola",
           "addressRegion": "Alicante",
           "postalCode": "03450",
           "addressCountry": "ES"
         },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 38.7167,
+          "longitude": -0.6500
+        },
         "areaServed": [
-          {"@type": "Place","name": "Comunidad Valenciana"},
-          {"@type": "Place","name": "Alicante"}
+          {
+            "@type": "AdministrativeArea",
+            "name": "Alicante",
+            "containedInPlace": { "@type": "AdministrativeArea", "name": "Comunidad Valenciana" }
+          },
+          { "@type": "Country", "name": "España" }
         ],
-        "sameAs": ["https://www.linkedin.com/in/miguelangelriberablanes"],
-        "serviceType": [
-          "Proyecto ICT RD 346/2011",
+        "founder": {
+          "@type": "Person",
+          "@id": "https://www.proyectoict.com/#persona",
+          "name": "Miguel Ángel Ribera Blanes",
+          "jobTitle": "Ingeniero de Telecomunicación",
+          "description": "Ingeniero de Telecomunicación con más de 25 años de experiencia en proyectos ICT y certificaciones de telecomunicaciones en España.",
+          "email": "miguelangelribbanyeres@gmail.com",
+          "telephone": "+34610518583",
+          "sameAs": ["https://www.linkedin.com/in/miguelangelriberablanes"]
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios ICT",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Proyecto ICT básico",
+              "description": "Proyecto ICT completo para edificios de hasta 5 viviendas. Incluye memoria técnica, planos, visado colegial, dirección de obra y certificación final conforme al RD 346/2011.",
+              "price": "700",
+              "priceCurrency": "EUR",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "700",
+                "priceCurrency": "EUR",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.proyectoict.com/tienda.html",
+              "availability": "https://schema.org/InStock",
+              "seller": { "@id": "https://www.proyectoict.com/#org" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Proyecto ICT estándar",
+              "description": "Proyecto ICT completo para edificios de hasta 10 viviendas. Incluye memoria técnica, planos, visado colegial, dirección de obra y certificación final.",
+              "price": "1000",
+              "priceCurrency": "EUR",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "1000",
+                "priceCurrency": "EUR",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.proyectoict.com/tienda.html",
+              "availability": "https://schema.org/InStock",
+              "seller": { "@id": "https://www.proyectoict.com/#org" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Acta de replanteo",
+              "description": "Coordinación con operadores de telecomunicaciones y elaboración del acta de replanteo. Precio fijo para cualquier tamaño de edificio.",
+              "price": "200",
+              "priceCurrency": "EUR",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "200",
+                "priceCurrency": "EUR",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.proyectoict.com/tienda.html",
+              "availability": "https://schema.org/InStock",
+              "seller": { "@id": "https://www.proyectoict.com/#org" }
+            }
+          ]
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/miguelangelriberablanes"
+        ],
+        "knowsAbout": [
+          "Proyecto ICT",
+          "Infraestructura Común de Telecomunicaciones",
+          "RD 346/2011",
           "Certificación ICT",
-          "Acta de replanteo operadores",
+          "Fibra óptica edificios",
           "Cableado estructurado",
-          "Consultoría de telecomunicaciones"
+          "Distribución de televisión",
+          "Acta de replanteo operadores"
         ]
       },
       {
+        "@type": "WebSite",
+        "@id": "https://www.proyectoict.com/#web",
+        "url": "https://www.proyectoict.com/",
+        "name": "ProyectoICT — Ingeniería de Telecomunicaciones Alicante",
+        "description": "Proyectos ICT, certificaciones y actas de replanteo para edificios en Alicante y Comunidad Valenciana. Más de 25 años de experiencia. Contratación online.",
+        "inLanguage": "es",
+        "publisher": { "@id": "https://www.proyectoict.com/#org" }
+      },
+      {
         "@type": "FAQPage",
-        "@id": "https://proyectoict.com/#faq",
+        "@id": "https://www.proyectoict.com/#faq",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "¿Qué incluye un proyecto ICT para obra nueva?",
+            "name": "¿Cuándo es obligatorio un proyecto ICT?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Memoria y planos conforme al RD 346/2011, dimensionamiento de canalizaciones, cuarto de telecomunicaciones, cabecera de TV y radio, infraestructura de fibra y cableado estructurado, así como coordinación con operadores."
+              "text": "Es obligatorio en todos los edificios de nueva construcción, ampliaciones y rehabilitaciones integrales en España, según el Real Decreto 346/2011. Sin el proyecto ICT visado no se puede obtener la licencia de primera ocupación."
             }
           },
           {
             "@type": "Question",
-            "name": "¿También gestionas la dirección y certificación de la obra ICT?",
+            "name": "¿Qué incluye un proyecto ICT?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sí. Además del proyecto ICT, realizo la dirección técnica, la certificación final de obra y el acta de replanteo con los operadores para asegurar la conformidad normativa."
+              "text": "Memoria técnica y planos conforme al RD 346/2011, dimensionamiento de canalizaciones y registros, cuarto de telecomunicaciones, cabecera de TV y radio, infraestructura de fibra óptica y cableado estructurado, visado colegial y coordinación con operadores."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto cuesta un proyecto ICT?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El precio orientativo es de 700 € para edificios de hasta 5 viviendas, 1.000 € para hasta 10 viviendas, y para más de 10 viviendas se calcula como (número de viviendas × 1.000) / 10 €. El acta de replanteo tiene un precio fijo de 200 €. IVA no incluido."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿También hacéis certificaciones ICT?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Realizamos la dirección técnica de obra y la certificación final ICT para edificios ya construidos que necesitan la certificación oficial. El precio es el mismo que el del proyecto ICT según el número de viviendas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Se puede contratar el proyecto ICT online?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Puedes contratar y pagar directamente desde nuestra web en proyectoict.com/tienda.html mediante PayPal. También puedes guardar el pedido y pagar más tarde desde tu área de cliente."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿En qué zonas trabajáis?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Principalmente en Alicante y la Comunidad Valenciana, aunque realizamos proyectos en toda España. Más de 25 años de experiencia en la zona."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.proyectoict.com/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.proyectoict.com/"
           }
         ]
       }
