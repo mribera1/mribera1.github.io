@@ -1,0 +1,65 @@
+# ProyectoICT — Ingeniería de Telecomunicaciones · Alicante
+
+> ProyectoICT es una consultoría especializada en proyectos ICT (Infraestructura Común de Telecomunicaciones) para edificios residenciales y terciarios en Alicante y la Comunidad Valenciana. Dirigida por Miguel Ángel Ribera Blanes, Ingeniero de Telecomunicación con más de 25 años de experiencia.
+
+## Qué es un proyecto ICT
+
+Un proyecto ICT es el documento técnico obligatorio por ley (Real Decreto 346/2011) que diseña la infraestructura de telecomunicaciones de un edificio: cableado de datos, fibra óptica, distribución de televisión terrestre y satélite, y telefonía. Es necesario para cualquier edificio de nueva construcción o rehabilitación en España.
+
+## Servicios
+
+- **Proyecto ICT completo**: memoria técnica, planos, dimensionamiento de canalizaciones y registros, cuarto de telecomunicaciones, coordinación con operadores. Para obra nueva y rehabilitación.
+- **Certificación ICT**: dirección técnica de obra y certificación final para edificios ya construidos que necesitan la certificación oficial.
+- **Acta de replanteo**: coordinación con operadores de telecomunicaciones (Movistar, Orange, Vodafone, MásMóvil) y elaboración del acta de replanteo.
+
+## Precios orientativos
+
+- Proyecto ICT hasta 5 viviendas: 700 €
+- Proyecto ICT hasta 10 viviendas: 1.000 €
+- Proyecto ICT más de 10 viviendas: (número de viviendas × 1.000) / 10 €
+- Certificación ICT: mismo precio que el proyecto
+- Acta de replanteo: 200 € (precio fijo)
+- IVA no incluido. Precios orientativos, el precio final depende de la complejidad del proyecto.
+
+## Casos de éxito
+
+- 12 adosados en Finestrat (Alicante): proyecto ICT completo para promoción residencial
+- Edificio de 27 viviendas en Elda (Alicante): proyecto + dirección de obra
+- Edificio de 2 viviendas de diseño: proyecto ICT + certificación final
+
+## Zona de actuación
+
+Alicante, provincia de Alicante, Comunidad Valenciana, España. Proyectos en toda España bajo consulta.
+
+## Contratación online
+
+Los servicios se pueden contratar directamente desde la web con pago seguro via PayPal en: https://www.proyectoict.com/tienda.html
+
+## Contacto
+
+- Web: https://www.proyectoict.com
+- Email: miguelangelribbanyeres@gmail.com
+- Teléfono: +34 610 518 583
+- LinkedIn: https://www.linkedin.com/in/miguelangelriberablanes
+- Ubicación: Banyeres de Mariola, Alicante, España (CP 03450)
+
+## Normativa aplicable
+
+Real Decreto 346/2011, de 11 de marzo, por el que se aprueba el Reglamento regulador de las infraestructuras comunes de telecomunicaciones para el acceso a los servicios de telecomunicación en el interior de las edificaciones.
+
+## Preguntas frecuentes
+
+**¿Cuándo es obligatorio un proyecto ICT?**
+Es obligatorio en todos los edificios de nueva construcción, ampliaciones y rehabilitaciones integrales en España. Sin el proyecto ICT visado no se puede obtener la licencia de primera ocupación.
+
+**¿Qué incluye el precio del proyecto ICT?**
+Memoria técnica, planos, visado colegial, dirección técnica de obra y certificación final. Todo lo necesario para el cumplimiento del RD 346/2011.
+
+**¿Cuánto tarda en hacerse un proyecto ICT?**
+Normalmente entre 1 y 3 semanas desde la recepción de la documentación del edificio.
+
+**¿Se puede contratar sin ser de Alicante?**
+Sí, se realizan proyectos en toda España aunque la especialización principal es en la Comunidad Valenciana.
+
+**¿Qué diferencia hay entre proyecto ICT y certificación ICT?**
+El proyecto ICT es el documento previo a la construcción. La certificación ICT acredita que la infraestructura instalada cumple con el proyecto aprobado; se realiza una vez finalizada la obra.
