@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de administración | ProyectoICT</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { background:#f0f2f5; }
+    .topbar { background:#1a1a2e; color:#fff; padding:.75rem 1.5rem; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+    .topbar .logo { font-weight:700; color:#4A9EFF; font-size:1.1rem; }
+    .sidebar { background:#fff; border-right:1px solid #e0e0e0; min-height:calc(100vh - 56px); padding:1.2rem .8rem; }
+    .nav-link { border-radius:8px; color:#444; font-weight:500; padding:.6rem 1rem; display:flex; align-items:center; gap:.6rem; }
+    .nav-link:hover, .nav-link.active { background:#e8f0fe; color:#0d6efd; }
+    .panel { display:none; }
+    .panel.active { display:block; }
+    .stat-card { background:#fff; border-radius:12px; padding:1.5rem; border:1px solid #e9ecef; height:100%; }
+    .stat-num { font-size:2rem; font-weight:700; }
+    .badge-estado { padding:.3rem .8rem; border-radius:20px; font-size:.78rem; font-weight:600; cursor:pointer; border:none; }
+    .estado-recibido   { background:#fff3cd; color:#856404; }
+    .estado-revision   { background:#cfe2ff; color:#084298; }
+    .estado-en_curso   { background:#d1ecf1; color:#0c5460; }
+    .estado-completado { background:#d4edda; color:#155724; }
+    .estado-entregado  { background:#d4edda; color:#155724; }
+    .estado-pendiente  { background:#f8d7da; color:#721c24; }
+    .estado-pagado     { background:#d4edda; color:#155724; }
+    .table th { background:#f8f9fa; font-size:.85rem; }
+    .table td { font-size:.85rem; vertical-align:middle; }
+    .nota-btn { font-size:.75rem; }
+    select.estado-select { border:none; background:transparent; font-weight:600; font-size:.78rem; cursor:pointer; padding:.2rem .4rem; border-radius:6px; }
+  </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="logo">⚙️ ProyectoICT Admin</div>
+  <div class="d-flex align-items-center gap-3">
+    <span class="small text-secondary" id="admin-nombre"></span>
+    <button class="btn btn-sm btn-outline-light" onclick="cerrarSesion()">Salir</button>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Sidebar -->
+    <div class="col-md-2 sidebar d-none d-md-block">
+      <nav class="mt-2 d-flex flex-column gap-1">
+        <a class="nav-link active" onclick="mostrarPanel('stats')" href="#">📊 Dashboard</a>
+        <a class="nav-link" onclick="mostrarPanel('pedidos')" href="#">📦 Pedidos</a>
+        <a class="nav-link" onclick="mostrarPanel('usuarios')" href="#">👥 Usuarios</a>
+        <a class="nav-link" onclick="mostrarPanel('leads')" href="#">💬 Leads</a>
+        <hr>
+        <a class="nav-link" href="/">🌐 Ver web</a>
+        <a class="nav-link" href="area-cliente.html">👤 Área cliente</a>
+      </nav>
+    </div>
+
+    <!-- Contenido -->
+    <div class="col-md-10 p-4">
+
+      <!-- Nav móvil -->
+      <div class="d-flex d-md-none gap-2 mb-3 overflow-auto">
+        <button class="btn btn-sm btn-primary" onclick="mostrarPanel('stats')">📊 Dashboard</button>
+        <button class="btn btn-sm btn-outline-primary" onclick="mostrarPanel('pedidos')">📦 Pedidos</button>
+        <button class="btn btn-sm btn-outline-primary" onclick="mostrarPanel('usuarios')">👥 Usuarios</button>
+        <button class="btn btn-sm btn-outline-primary" onclick="mostrarPanel('leads')">💬 Leads</button>
+      </div>
+
+      <!-- ── PANEL: Dashboard ──────────────────────────────────────────────── -->
+      <div class="panel active" id="panel-stats">
+        <h4 class="fw-bold mb-4">Dashboard</h4>
+        <div class="row g-3 mb-4" id="stats-cards">
+          <div class="col text-center py-5 text-muted">
+            <div class="spinner-border text-primary"></div>
+          </div>
+        </div>
+        <div class="stat-card mt-2">
+          <h6 class="fw-bold mb-3">Pedidos últimos 30 días</h6>
+          <div id="grafico-container" style="height:180px; display:flex; align-items:flex-end; gap:4px;"></div>
+        </div>
+      </div>
+
+      <!-- ── PANEL: Pedidos ────────────────────────────────────────────────── -->
+      <div class="panel" id="panel-pedidos">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold mb-0">Pedidos</h4>
+          <button class="btn btn-sm btn-outline-primary" onclick="cargarPedidos()">↻ Actualizar</button>
+        </div>
+        <div class="mb-3 d-flex gap-2 flex-wrap">
+          <input type="text" id="filtro-pedidos" class="form-control form-control-sm" style="max-width:250px" placeholder="Buscar por nombre o email..." oninput="filtrarPedidos()">
+          <select id="filtro-estado" class="form-select form-select-sm" style="max-width:180px" onchange="filtrarPedidos()">
+            <option value="">Todos los estados</option>
+            <option value="pendiente">Pendiente pago</option>
+            <option value="pagado">Pagado</option>
+          </select>
+        </div>
+        <div class="stat-card p-0 overflow-auto">
+          <table class="table table-hover mb-0" id="tabla-pedidos">
+            <thead>
+              <tr>
+                <th>#</th><th>Cliente</th><th>Servicio</th><th>Importe</th>
+                <th>Pago</th><th>Estado proyecto</th><th>Fecha</th><th>Nota</th>
+              </tr>
+            </thead>
+            <tbody id="pedidos-body">
+              <tr><td colspan="8" class="text-center py-4"><div class="spinner-border spinner-border-sm text-primary"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── PANEL: Usuarios ───────────────────────────────────────────────── -->
+      <div class="panel" id="panel-usuarios">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold mb-0">Usuarios registrados</h4>
+          <button class="btn btn-sm btn-outline-primary" onclick="cargarUsuarios()">↻ Actualizar</button>
+        </div>
+        <div class="stat-card p-0 overflow-auto">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr><th>#</th><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Pedidos</th><th>Total pagado</th><th>Registro</th></tr>
+            </thead>
+            <tbody id="usuarios-body">
+              <tr><td colspan="7" class="text-center py-4"><div class="spinner-border spinner-border-sm text-primary"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── PANEL: Leads ──────────────────────────────────────────────────── -->
+      <div class="panel" id="panel-leads">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold mb-0">Leads (formulario + chat)</h4>
+          <button class="btn btn-sm btn-outline-primary" onclick="cargarLeads()">↻ Actualizar</button>
+        </div>
+        <div class="stat-card p-0 overflow-auto">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr><th>#</th><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Origen</th><th>Mensaje</th><th>Fecha</th></tr>
+            </thead>
+            <tbody id="leads-body">
+              <tr><td colspan="7" class="text-center py-4"><div class="spinner-border spinner-border-sm text-primary"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nota -->
+<div class="modal fade" id="modalNota" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header py-2"><h6 class="modal-title fw-bold">Nota interna</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <textarea id="nota-texto" class="form-control" rows="4" placeholder="Añade una nota sobre este pedido..."></textarea>
+        <input type="hidden" id="nota-pedido-id">
+      </div>
+      <div class="modal-footer py-2">
+        <button class="btn btn-sm btn-primary" onclick="guardarNota()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script>
+const API    = 'https://api.proyectoict.com';
+const token  = localStorage.getItem('pict_token');
+let todosLosPedidos = [];
+
+// Verificar acceso admin
+if (!token) { window.location.href = 'login.html'; }
+
+fetch(`${API}/auth/me`, { headers: { Authorization: `Bearer ${token}` } })
+  .then(r => r.json())
+  .then(data => {
+    if (!data.usuario) { window.location.href = 'login.html'; return; }
+    // Verificar que es admin probando un endpoint admin
+    fetch(`${API}/admin/stats`, { headers: { Authorization: `Bearer ${token}` } })
+      .then(r => r.json())
+      .then(d => {
+        if (d.error) { alert('Acceso denegado'); window.location.href = '/'; return; }
+        document.getElementById('admin-nombre').textContent = data.usuario.nombre;
+        cargarStats();
+      });
+  }).catch(() => window.location.href = 'login.html');
+
+// ── Navegación ──────────────────────────────────────────────────────────────
+function mostrarPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if (id === 'stats')    cargarStats();
+  if (id === 'pedidos')  cargarPedidos();
+  if (id === 'usuarios') cargarUsuarios();
+  if (id === 'leads')    cargarLeads();
+}
+
+function cerrarSesion() {
+  fetch(`${API}/auth/logout`, { method:'POST', headers:{ Authorization:`Bearer ${token}` } }).catch(()=>{});
+  localStorage.clear();
+  window.location.href = '/';
+}
+
+// ── Stats ───────────────────────────────────────────────────────────────────
+async function cargarStats() {
+  const resp = await fetch(`${API}/admin/stats`, { headers:{ Authorization:`Bearer ${token}` } });
+  const data = await resp.json();
+  if (!data.stats) return;
+  const s = data.stats;
+
+  document.getElementById('stats-cards').innerHTML = `
+    <div class="col-md-3 col-6">
+      <div class="stat-card text-center">
+        <div class="stat-num text-success">${s.pedidos_pagados}</div>
+        <div class="text-muted small">Pedidos pagados</div>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="stat-card text-center">
+        <div class="stat-num text-primary">${s.ingresos_total.toLocaleString('es-ES')} €</div>
+        <div class="text-muted small">Ingresos totales</div>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="stat-card text-center">
+        <div class="stat-num text-warning">${s.pedidos_pendientes}</div>
+        <div class="text-muted small">Pendientes de pago</div>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="stat-card text-center">
+        <div class="stat-num text-info">${s.total_usuarios}</div>
+        <div class="text-muted small">Usuarios registrados</div>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="stat-card text-center">
+        <div class="stat-num text-secondary">${s.total_leads}</div>
+        <div class="text-muted small">Leads capturados</div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="stat-card">
+        <div class="small fw-bold mb-2">Proyectos por estado</div>
+        <div class="d-flex flex-wrap gap-2">
+          ${Object.entries(s.por_estado || {}).map(([e,n]) =>
+            `<span class="badge-estado estado-${e}">${e}: ${n}</span>`
+          ).join('') || '<span class="text-muted small">Sin datos aún</span>'}
+        </div>
+      </div>
+    </div>`;
+
+  // Mini gráfico de barras últimos 30 días
+  const cont = document.getElementById('grafico-container');
+  const dias  = s.ultimos_30_dias || [];
+  if (dias.length === 0) { cont.innerHTML = '<p class="text-muted small m-auto">Sin pedidos en los últimos 30 días</p>'; return; }
+  const maxImp = Math.max(...dias.map(d => d.importe), 1);
+  cont.innerHTML = dias.map(d => {
+    const h = Math.max(Math.round((d.importe / maxImp) * 160), 4);
+    return `<div title="${d.fecha}: ${d.importe}€ (${d.pedidos} pedido/s)"
+      style="flex:1;min-width:8px;height:${h}px;background:#0d6efd;border-radius:3px 3px 0 0;
+             cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity=.7"
+             onmouseout="this.style.opacity=1"></div>`;
+  }).join('');
+}
+
+// ── Pedidos ─────────────────────────────────────────────────────────────────
+async function cargarPedidos() {
+  const resp = await fetch(`${API}/admin/pedidos`, { headers:{ Authorization:`Bearer ${token}` } });
+  const data = await resp.json();
+  todosLosPedidos = data.pedidos || [];
+  renderPedidos(todosLosPedidos);
+}
+
+function renderPedidos(pedidos) {
+  const tbody = document.getElementById('pedidos-body');
+  if (!pedidos.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-4">Sin pedidos</td></tr>';
+    return;
+  }
+  const estados = ['recibido','revision','en_curso','completado','entregado'];
+  tbody.innerHTML = pedidos.map(p => `
+    <tr>
+      <td class="text-muted">#${p.id}</td>
+      <td>
+        <div class="fw-semibold">${p.nombre || '—'}</div>
+        <div class="text-muted" style="font-size:.78rem">${p.email || ''}</div>
+        ${p.telefono ? `<div class="text-muted" style="font-size:.78rem">${p.telefono}</div>` : ''}
+      </td>
+      <td>
+        <div>${p.producto}</div>
+        ${p.viviendas ? `<div class="text-muted" style="font-size:.78rem">${p.viviendas} viv.</div>` : ''}
+      </td>
+      <td class="fw-bold text-primary">${p.importe.toLocaleString('es-ES')} €</td>
+      <td><span class="badge-estado estado-${p.estado_pago}">${p.estado_pago}</span></td>
+      <td>
+        <select class="estado-select estado-${p.estado_proyecto?.toLowerCase()}"
+                onchange="cambiarEstado(${p.id}, this.value, this)">
+          ${estados.map(e => `<option value="${e}" ${p.estado_proyecto===e?'selected':''}>${e.replace('_',' ')}</option>`).join('')}
+        </select>
+      </td>
+      <td class="text-muted" style="font-size:.78rem">${new Date(p.fecha).toLocaleDateString('es-ES')}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-secondary nota-btn" onclick="abrirNota(${p.id}, \`${(p.nota_admin||'').replace(/`/g,"'")}\`)">
+          ${p.nota_admin ? '📝' : '+'} Nota
+        </button>
+      </td>
+    </tr>`).join('');
+}
+
+function filtrarPedidos() {
+  const texto  = document.getElementById('filtro-pedidos').value.toLowerCase();
+  const estado = document.getElementById('filtro-estado').value;
+  const filtrados = todosLosPedidos.filter(p => {
+    const matchTexto  = !texto  || (p.nombre||'').toLowerCase().includes(texto) || (p.email||'').toLowerCase().includes(texto);
+    const matchEstado = !estado || p.estado_pago === estado;
+    return matchTexto && matchEstado;
+  });
+  renderPedidos(filtrados);
+}
+
+async function cambiarEstado(pedidoId, nuevoEstado, selectEl) {
+  selectEl.className = `estado-select estado-${nuevoEstado}`;
+  const resp = await fetch(`${API}/admin/pedido/estado`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json', Authorization:`Bearer ${token}`},
+    body: JSON.stringify({ pedido_id: pedidoId, estado_proyecto: nuevoEstado })
+  });
+  const data = await resp.json();
+  if (data.status !== 'ok') { alert('Error al actualizar'); cargarPedidos(); }
+}
+
+function abrirNota(pedidoId, notaActual) {
+  document.getElementById('nota-pedido-id').value = pedidoId;
+  document.getElementById('nota-texto').value     = notaActual || '';
+  new bootstrap.Modal(document.getElementById('modalNota')).show();
+}
+
+async function guardarNota() {
+  const pedidoId = document.getElementById('nota-pedido-id').value;
+  const nota     = document.getElementById('nota-texto').value;
+  await fetch(`${API}/admin/pedido/nota`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json', Authorization:`Bearer ${token}`},
+    body: JSON.stringify({ pedido_id: pedidoId, nota })
+  });
+  bootstrap.Modal.getInstance(document.getElementById('modalNota')).hide();
+  cargarPedidos();
+}
+
+// ── Usuarios ────────────────────────────────────────────────────────────────
+async function cargarUsuarios() {
+  const resp = await fetch(`${API}/admin/usuarios`, { headers:{ Authorization:`Bearer ${token}` } });
+  const data = await resp.json();
+  const tbody = document.getElementById('usuarios-body');
+  if (!data.usuarios?.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">Sin usuarios</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.usuarios.map(u => `
+    <tr>
+      <td class="text-muted">#${u.id}</td>
+      <td class="fw-semibold">${u.nombre}</td>
+      <td>${u.email}</td>
+      <td>${u.telefono || '—'}</td>
+      <td class="text-center"><span class="badge bg-primary">${u.num_pedidos}</span></td>
+      <td class="fw-bold text-success">${u.total_pagado.toLocaleString('es-ES')} €</td>
+      <td class="text-muted">${new Date(u.fecha).toLocaleDateString('es-ES')}</td>
+    </tr>`).join('');
+}
+
+// ── Leads ───────────────────────────────────────────────────────────────────
+async function cargarLeads() {
+  const resp = await fetch(`${API}/admin/clientes`, { headers:{ Authorization:`Bearer ${token}` } });
+  const data = await resp.json();
+  const tbody = document.getElementById('leads-body');
+  if (!data.clientes?.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">Sin leads</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.clientes.map(c => `
+    <tr>
+      <td class="text-muted">#${c.id}</td>
+      <td>${c.nombre || ''} ${c.apellidos || ''}</td>
+      <td><a href="mailto:${c.email}">${c.email}</a></td>
+      <td>${c.telefono || '—'}</td>
+      <td><span class="badge bg-secondary">${c.origen || '—'}</span></td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${c.descripcion||''}">${c.descripcion || '—'}</td>
+      <td class="text-muted">${new Date(c.fecha).toLocaleDateString('es-ES')}</td>
+    </tr>`).join('');
+}
+</script>
+</body>
+</html>
