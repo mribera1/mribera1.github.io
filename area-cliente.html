@@ -70,6 +70,11 @@
         <a class="sidebar-link" href="/" >
           <span class="icon">🌐</span> Volver a la web
         </a>
+        <div id="btn-admin" style="display:none">
+          <a class="sidebar-link" href="admin.html" style="color:#dc3545">
+            <span class="icon">⚙️</span> Panel Admin
+          </a>
+        </div>
       </nav>
     </div>
 
@@ -352,6 +357,12 @@ async function pagarAhora(pedidoId) {
     alert('Error de conexión. Inténtalo de nuevo.');
   }
 }
+
+// Mostrar botón admin si es admin
+fetch(`${API}/admin/stats`, { headers: { Authorization: `Bearer ${token}` } })
+  .then(r => r.json())
+  .then(d => { if (d.status === 'ok') document.getElementById('btn-admin').style.display = 'block'; })
+  .catch(() => {});
 
 // Cargar pedidos al arrancar
 cargarPedidos();
